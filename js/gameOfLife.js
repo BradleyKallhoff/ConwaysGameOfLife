@@ -29,8 +29,6 @@ canvas.addEventListener("mousedown", e => {
     var xPosition = Math.floor((e.clientX - rectSize) / rectSize);
     var yPosition = Math.floor((e.clientY - rectSize) / rectSize);
 
-    console.log(xPosition, yPosition)
-
     if(drawOption === "draw"){
         addCell(xCoordinate, yCoordinate, yPosition, xPosition);
     } else {
@@ -64,6 +62,7 @@ canvas.addEventListener("mouseup", function(){
 });
 
 function drawGrid() {
+    positions = [];
 
     for(var i = 0; i < height; i += rectSize) {
         var row = [];
@@ -106,13 +105,24 @@ function updateGrid() {
     }
 }
 
+function clearGrid() {
+    for(var i = 0; i < height/rectSize; i++) {
+        for( var j = 0; j < width/rectSize; j++) {
+
+            if(positions[i][j] !== 0) {
+                removeCell(j*rectSize, i*rectSize, i, j);
+            }
+        }
+    }
+}
+
 function startStopGame() {
     var startButton = document.getElementById("startButton");
     if (startButton.value === "Stop") {
         startButton.value = "Start";
         clearInterval(starting);
     } else {
-        starting = setInterval(updateGrid, 500)
+        starting = setInterval(updateGrid, document.getElementById('speed').value);
         startButton.value = "Stop";
     }
 }

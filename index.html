@@ -3,19 +3,23 @@
 <head>
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body class="bg-dark">
 
-    <canvas id="canvas" width="1200" height="800" style="background-color: #ccc"></canvas>
 
-    <script src="js/gameOfLife.js"></script>
+        <div>
+            <canvas id="canvas" width="1200" height="800" style="background-color: #ccc"></canvas>
+            <script src="js/gameOfLife.js"></script>
+        </div>
 
-    <div>
-        <button type="button" value="Start" onclick="startStopGame()" id="startButton">Start/Stop Game</button>
-        <input type="radio" id="draw" name="drawOptions" value="draw" checked>
-        <label for="draw">Draw</label>
-        <input type="radio" id="erase" name="drawOptions" value="erase">
-        <label for="erase">Erase</label>
-    </div>
+        <div style="padding: auto;">
+            <button type="button" value="Start" onclick="startStopGame()" id="startButton">Start/Stop Game</button>
+            <input type="radio" id="draw" name="drawOptions" value="draw" checked>
+            <label for="draw">Draw</label>
+            <input type="radio" id="erase" name="drawOptions" value="erase">
+            <label for="erase">Erase</label>
+            <input type="range" id="speed" min="50" max="1000" step="50" value="500">
+            <button type="button" onclick="clearGrid()">Clear Canvas</button>
+        </div>
 
 </body>
 </html>
