@@ -7,10 +7,13 @@ var drag = false;
 var positions = [];
 var lastMove = [];
 var starting;
+var drawOption;
+
 const dead = 0;
 const alive = 1;
 const tagDead = 2;
 const tagAlive = 3;
+
 
 ctx.strokeStyle = "#666";
 
@@ -18,6 +21,7 @@ drawGrid();
 
 canvas.addEventListener("mousedown", e => {
     drag = true;
+    drawOption = document.querySelector('input[name="drawOptions"]:checked').value;
 
     var xCoordinate = e.clientX - e.clientX%rectSize - rectSize;
     var yCoordinate = e.clientY - e.clientY%rectSize - rectSize;
@@ -27,7 +31,7 @@ canvas.addEventListener("mousedown", e => {
 
     console.log(xPosition, yPosition)
 
-    if(positions[yPosition][xPosition] === dead){
+    if(drawOption === "draw"){
         addCell(xCoordinate, yCoordinate, yPosition, xPosition);
     } else {
         removeCell(xCoordinate, yCoordinate, yPosition, xPosition);
@@ -36,6 +40,8 @@ canvas.addEventListener("mousedown", e => {
 
 canvas.addEventListener("mousemove", e=> {
     if(drag === true) {
+        
+        var drawOption = document.querySelector('input[name="drawOptions"]:checked').value;
 
         var xCoordinate = e.clientX - e.clientX%rectSize - rectSize;
         var yCoordinate = e.clientY - e.clientY%rectSize - rectSize;
@@ -44,7 +50,7 @@ canvas.addEventListener("mousemove", e=> {
         var yPosition = Math.floor((e.clientY - rectSize) / rectSize);
 
         if(lastMove[0] != xPosition || lastMove[1] != yPosition) {
-            if(positions[yPosition][xPosition] === dead){
+            if(drawOption === "draw"){
                 addCell(xCoordinate, yCoordinate, yPosition, xPosition);
             } else {
                 removeCell(xCoordinate, yCoordinate, yPosition, xPosition);
